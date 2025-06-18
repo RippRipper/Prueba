@@ -9,4 +9,5 @@ requests==2.28.2
 streamlit==1.22.0
 lxml==4.9.2
 html5lib==1.1
-multitasking==0.0.11  # Dependencia crítica para yfinance
+multitasking==0.0.11
+pyenv==1.2.25
