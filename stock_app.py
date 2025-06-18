@@ -1,3 +1,18 @@
+
+import sys
+st.write("Versión de Python:", sys.version)
+st.write("Dependencias instaladas:")
+dependencies = ['yfinance', 'pandas', 'numpy', 'plotly', 'scikit-learn', 'nltk', 'beautifulsoup4', 'requests', 'lxml', 'html5lib']
+for dep in dependencies:
+    try:
+        module = __import__(dep)
+        st.write(f"{dep}: {module.__version__}")
+    except ImportError:
+        st.error(f"{dep} NO INSTALADO")
+    except AttributeError:
+        st.write(f"{dep}: versión no disponible")
+
+
 import streamlit as st
 import yfinance as yf
 import pandas as pd
