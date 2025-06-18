@@ -1,24 +1,23 @@
-import streamlit as st
-import sys
+# Verificación del entorno
+import os
+import platform
 
-st.title("Verificador de Dependencias")
-st.write(f"Python version: {sys.version}")
-st.write(f"Path: {sys.path}")
+# Forzar el uso de Python 3.9
+if not os.path.exists('venv') or platform.python_version() != '3.9.16':
+    print("Reconstruyendo entorno...")
+    os.system('bash setup.sh')
 
+# Importaciones críticas
 try:
-    import yfinance
-    st.success("✅ yfinance instalado correctamente")
-    st.write(f"Versión: {yfinance.__version__}")
+    import sys
 except ImportError:
-    st.error("❌ yfinance NO instalado")
-    # Intentar instalar automáticamente
-    import subprocess
-    with st.spinner("Instalando yfinance..."):
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance==0.2.18"])
-    st.experimental_rerun()
-
-
-
+    # Solución de emergencia
+    print("ERROR: sys no disponible - usando alternativa")
+    class FakeSys:
+        version = "3.9.16 (emergency)"
+        executable = "/usr/bin/python3"
+        path = []
+    sys = FakeSys()
 
 import os
 import sys
