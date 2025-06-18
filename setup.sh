@@ -1,8 +1,16 @@
 #!/bin/bash
 set -e  # Detener en caso de error
 
-# Instalar dependencias con pip
-python -m pip install --upgrade pip
+# Instalar Python 3.9 si es necesario
+pyenv install 3.9.16 -s
+pyenv global 3.9.16
+
+# Configurar entorno
+python -m venv venv
+source venv/bin/activate
+
+# Instalar dependencias
+pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
 
 # Descargar recursos de NLTK
