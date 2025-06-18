@@ -1,17 +1,18 @@
-
+import os
 import sys
-st.write("Versión de Python:", sys.version)
-st.write("Dependencias instaladas:")
-dependencies = ['yfinance', 'pandas', 'numpy', 'plotly', 'scikit-learn', 'nltk', 'beautifulsoup4', 'requests', 'lxml', 'html5lib']
-for dep in dependencies:
-    try:
-        module = __import__(dep)
-        st.write(f"{dep}: {module.__version__}")
-    except ImportError:
-        st.error(f"{dep} NO INSTALADO")
-    except AttributeError:
-        st.write(f"{dep}: versión no disponible")
 
+try:
+    import yfinance
+except ImportError:
+    # Instalar yfinance directamente si falló la instalación previa
+    import subprocess
+    subprocess.check_call([
+        sys.executable, 
+        "-m", "pip", "install", 
+        "yfinance==0.2.18", 
+        "multitasking==0.0.11"
+    ])
+    import yfinance
 
 import streamlit as st
 import yfinance as yf
