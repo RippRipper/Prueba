@@ -1,3 +1,25 @@
+import streamlit as st
+import sys
+
+st.title("Verificador de Dependencias")
+st.write(f"Python version: {sys.version}")
+st.write(f"Path: {sys.path}")
+
+try:
+    import yfinance
+    st.success("✅ yfinance instalado correctamente")
+    st.write(f"Versión: {yfinance.__version__}")
+except ImportError:
+    st.error("❌ yfinance NO instalado")
+    # Intentar instalar automáticamente
+    import subprocess
+    with st.spinner("Instalando yfinance..."):
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance==0.2.18"])
+    st.experimental_rerun()
+
+
+
+
 import os
 import sys
 
